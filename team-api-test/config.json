@@ -1,0 +1,61 @@
+{
+  "allowed_hosts": [
+    "api.zocdoc.com",
+    "pulse.zocdoc.com"
+  ],
+  "internal_host_suffixes": [
+    "zocdoccloud.com"
+  ],
+  "proxy_url": "http://localhost:3000",
+  "proxy_start_hint": "cd ~/tools/auth-proxy-server && npm start",
+  "id_types": {
+    "pr": "provider",
+    "pt": "practice",
+    "org": "organization",
+    "lo": "location"
+  },
+  "id_body_length": 22,
+  "verification_max_age_hours": 24,
+  "max_requests_per_run": 60,
+  "timeout_seconds": 30,
+  "body_preview_chars": 4000,
+  "redact_keys": [
+    "authorization",
+    "cookie",
+    "set-cookie",
+    "token",
+    "access_token",
+    "refresh_token",
+    "jwt",
+    "password",
+    "secret",
+    "api_key",
+    "apikey",
+    "ssn",
+    "dob",
+    "date_of_birth",
+    "birthdate",
+    "email",
+    "phone",
+    "phone_number",
+    "first_name",
+    "last_name",
+    "patient",
+    "patient_id"
+  ],
+  "snowflake_account": "ZOCDOC_001",
+  "sf_nonce_max_age_minutes": 30,
+  "read_methods": [
+    "GET",
+    "HEAD",
+    "OPTIONS"
+  ],
+  "proxy_401_retry_seconds": 10,
+  "keep_response_headers": [
+    "content-type",
+    "x-request-id",
+    "x-correlation-id",
+    "x-amzn-trace-id",
+    "www-authenticate"
+  ]
+}

@@ -1,0 +1,52 @@
+# Seed for ~/QA/DI-QA/customers.yaml. The team copies this file there on the first run if no registry exists yet.
+# After that, edit ~/QA/DI-QA/customers.yaml, not this file.
+#
+#   customerId:     slug used in S3 keys and di-state (must match the config folder name)
+#   aliases:        names you might type, matched case-insensitively
+#   environment:    the config's `environment`; prod is refused unless allow_prod: true
+#   config_ref:     git ref in operations-provider-onboarding to read config.json from
+#   bucket:         the di-ingest bucket for that environment
+#   debug_api_host: base URL of the operations-provider-onboarding service for that env
+
+customers:
+  - customerId: wcf-qa-test-1
+    aliases: [wcf, "women's care", womens care, wcf qa]
+    environment: qa
+    config_ref: origin/master
+    bucket: dev001-di-ingest
+    debug_api_host: https://operations-provider-onboarding-v1.east.zocdoccloud.net
+    notes: >
+      Also expects the PDF "WCF & WCA Participating Health Plan Directory". You supply it,
+      or the batch waits for external validation unless the SkipDiExternalValidationHandoff
+      flag is on.
+
+  - customerId: sondermind-qa-testing
+    aliases: [sondermind, sonder mind, sm]
+    environment: dev
+    config_ref: origin/sid/sondermind-qa-wcf-headshot-configs   # not on main yet; switch once merged
+    bucket: dev001-di-ingest
+    debug_api_host: https://operations-provider-onboarding-v1.east.zocdoccloud.net
+    notes: >
+      Practice IDs must come from the config's include allow-list, or every row is
+      silently dropped. The config shares prod SonderMind org identifiers. Check
+      allowProviderCreate in the deployed config (DI-3129 if false).
+
+  - customerId: wcf-headshot-test-1
+    aliases: [wcf headshot, wcf-headshot, headshot test, wcf headshot test]
+    environment: dev
+    config_ref: origin/master
+    bucket: dev001-di-ingest
+    debug_api_host: https://operations-provider-onboarding-v1.east.zocdoccloud.net
+    notes: >
+      Headshot test customer (HeadshotUrl column `headshot_url`, plus allowedHosts).
+      Headshots upload only when providerroster_di_ingestion_downstream_calls is ON.
+      Rekognition rejects (DI-3233) happen only when providerroster_di_headshot_rekognition is ON.
+      On UPDATE, a headshot only fills a missing photo and never replaces one.
+      Confirm the bucket and environment before the first run.
+
+  - customerId: wcf-dev-test-1
+    aliases: [wcf dev]
+    environment: dev
+    config_ref: origin/master
+    bucket: dev001-di-ingest
+    debug_api_host: https://operations-provider-onboarding-v1.east.zocdoccloud.net
